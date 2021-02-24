@@ -1,8 +1,32 @@
-import React from "react";
-import { ExperienceBar } from "../components/ExperienceBar";
+import React from 'react';
 
-export default function Home() {
+import Head from 'next/head';
+import { Container } from '../styles/pages/styles';
+
+import ExperienceBar from '../components/ExperienceBar';
+import Profile from '../components/Profile';
+import CompletedChallenges from '../components/CompletedChallenges';
+import Countdown from '../components/Countdown';
+
+const Home: React.FC = () => {
   return (
-    <ExperienceBar />
+    <Container>
+      <Head>
+        <title>Home | move.it</title>
+      </Head>
+
+      <ExperienceBar />
+
+      <section>
+        <div>
+          <Profile />
+          <CompletedChallenges />
+          <Countdown />
+        </div>
+        <div />
+      </section>
+    </Container>
   );
-}
+};
+
+export default Home;

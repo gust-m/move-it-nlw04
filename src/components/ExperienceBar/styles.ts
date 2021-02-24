@@ -39,7 +39,7 @@ export const Header = styled.header`
   }
 `;
 
-export const CurrentXP = styled.div<CurrentXPProps>`
+export const CurrentExperience = styled.div<CurrentXPProps>`
   height: 4px;
   border-radius: 4px;
   background: var(--green);
