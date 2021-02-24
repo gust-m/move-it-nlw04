@@ -1,12 +1,15 @@
+import { ReactNode } from 'react';
+import { AppProps } from 'next/app';
 import GlobalStyle from '../styles/global';
 
-// eslint-disable-next-line react/prop-types
-const MyApp: any = ({ Component, pageProps }): any => {
+import { ChallengesProvider } from '../contexts/ChallengeContext';
+
+const MyApp: ReactNode = ({ Component, pageProps }: AppProps) => {
   return (
-    <>
+    <ChallengesProvider>
       <Component {...pageProps} />
       <GlobalStyle />
-    </>
+    </ChallengesProvider>
   );
 };
 

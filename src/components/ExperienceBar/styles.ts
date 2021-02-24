@@ -30,19 +30,24 @@ export const Header = styled.header`
     margin: 0 1.5rem;
     position: relative;
   }
-
-  > div > span {
-    position: absolute;
-    left: 50%;
-    margin-top: 12px;
-    transform: translateX(-50%);
-  }
 `;
 
 export const CurrentExperience = styled.div<CurrentXPProps>`
   height: 4px;
   border-radius: 4px;
   background: var(--green);
+
+  span {
+    position: absolute;
+    margin-top: 12px;
+    transform: translateX(-50%);
+    width: 2.5rem;
+
+    ${props =>
+      css`
+        left: ${props.width};
+      `}
+  }
 
   ${props =>
     css`

@@ -1,10 +1,15 @@
+import { useContext } from 'react';
+import { ChallengeContext } from '../../contexts/ChallengeContext';
 import { Container } from './styled';
 
-const CompletedChallenges: React.FC = () => (
-  <Container>
-    <span>Completed Challenges</span>
-    <span>5</span>
-  </Container>
-);
+const CompletedChallenges: React.FC = () => {
+  const { challengesCompleted } = useContext(ChallengeContext);
+  return (
+    <Container>
+      <span>Completed Challenges</span>
+      <span>{challengesCompleted}</span>
+    </Container>
+  );
+};
 
 export default CompletedChallenges;

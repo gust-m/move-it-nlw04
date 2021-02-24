@@ -1,4 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+interface ButtonProps {
+  status: boolean;
+  hasFinished: boolean;
+}
 
 export const Container = styled.div`
   display: flex;
@@ -39,7 +44,7 @@ export const Counter = styled.div`
   }
 `;
 
-export const Button = styled.button`
+export const Button = styled.button<ButtonProps>`
   width: 100%;
   height: 5rem;
 
@@ -59,7 +64,42 @@ export const Button = styled.button`
   font-weight: 600;
   transition: background-color 0.2s;
 
-  &:hover {
+  p {
+    display: flex;
+    margin-left: 16px;
+
+    ${props =>
+      props.hasFinished
+        ? css`
+            color: var(--green);
+          `
+        : css``}
+  }
+
+  &:not(:disabled):hover {
     background: var(--blue-dark);
   }
+
+  ${props =>
+    props.status
+      ? css`
+          background: var(--white);
+          color: var(--title);
+
+          &:not(:disabled):hover {
+            background: var(--red);
+            color: var(--white);
+          }
+        `
+      : css``}
+
+  ${props =>
+    props.hasFinished
+      ? css`
+          background: var(--white);
+          color: var(--text);
+          cursor: not-allowed;
+          border-bottom: 4px solid var(--green);
+        `
+      : css``}
 `;

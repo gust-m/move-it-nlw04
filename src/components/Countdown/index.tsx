@@ -1,10 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { FaCheckCircle, FaRegStopCircle, FaPlay } from 'react-icons/fa';
 import { Container, Counter, Button } from './styles';
+import { ChallengeContext } from '../../contexts/ChallengeContext';
+
+let countdownTimeout: NodeJS.Timeout;
 
 const Countdown: React.FC = () => {
-  const [time, setTime] = useState(25 * 60);
-  const [active, setActive] = useState(false);
-  const [start, setStart] = useState('Start a cycle');
+  const [time, setTime] = useState(0.05 * 60);
+  const [isActive, setIsActive] = useState(false);
+  const [buttonText, setButtonText] = useState('Start a cycle');
+  const [hasFinished, setHasFinished] = useState(false);
+  const [disabledButton, setDisabledButton] = useState(false);
+
+  const { startNewChallenge } = useContext(ChallengeContext);
 
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
@@ -18,21 +26,33 @@ const Countdown: React.FC = () => {
 
   const handleStartCountdown = (): void => {
     // eslint-disable-next-line no-unused-expressions
-    active ? setActive(false) : setActive(true);
+    isActive ? setIsActive(false) : setIsActive(true);
   };
 
   useEffect(() => {
-    if (active && time > 0) {
-      setStart('Pause');
-      setTimeout(() => {
+    if (isActive && time > 0) {
+      setButtonText('Leave Cycle');
+      countdownTimeout = setTimeout(() => {
         setTime(time - 1);
       }, 1000);
+    } else if (isActive && time === 0) {
+      setHasFinished(true);
+      setIsActive(false);
     }
 
-    if (!active && time !== 25 * 60) {
-      setStart('Click to continue');
+    if (!isActive) {
+      clearTimeout(countdownTimeout);
+      setTime(0.05 * 60);
+      setButtonText('Start a cycle');
     }
-  }, [active, time]);
+
+    if (!isActive && hasFinished) {
+      setButtonText('Finished cycle');
+      setTime(0);
+      startNewChallenge();
+      setDisabledButton(true);
+    }
+  }, [isActive, time, hasFinished]);
 
   return (
     <>
@@ -47,7 +67,19 @@ const Countdown: React.FC = () => {
           <span>{secondsRight}</span>
         </Counter>
       </Container>
-      <Button onClick={handleStartCountdown}>{start}</Button>
+      <Button
+        status={isActive}
+        onClick={handleStartCountdown}
+        hasFinished={hasFinished}
+        disabled={disabledButton}
+      >
+        {buttonText}
+        <p>
+          {hasFinished && <FaCheckCircle size={20} />}
+          {isActive && <FaRegStopCircle size={20} />}
+          {!hasFinished && !isActive && <FaPlay size={20} />}
+        </p>
+      </Button>
     </>
   );
 };
