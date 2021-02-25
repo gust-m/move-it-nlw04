@@ -1,4 +1,5 @@
-import { createContext, ReactNode, useState } from 'react';
+/* eslint-disable no-param-reassign */
+import { createContext, ReactNode, useEffect, useState } from 'react';
 
 import challenges from '../../challenges.json';
 
@@ -14,9 +15,10 @@ interface ChallengeProviderData {
   currentExperience: number;
   activeChallenge: ExerciseProps;
   experienceToNextLevel: number;
-  levelUp(): void;
-  startNewChallenge(): void;
-  resetChallenge(): void;
+  levelUp: () => void;
+  startNewChallenge: () => void;
+  resetChallenge: () => void;
+  completeChallenge: () => void;
 }
 
 interface ChallengesProvidersProps {
@@ -32,9 +34,13 @@ export const ChallengesProvider: React.FC = ({
   const [currentExperience, setCurrentExperience] = useState(0);
   const [challengesCompleted, setChallengesCompleted] = useState(0);
 
-  const [activeChallenge, setActiveChallenge] = useState(null);
+  const [activeChallenge, setActiveChallenge] = useState<ExerciseProps>(null);
 
   const experienceToNextLevel = ((level + 1) * 4) ** 2;
+
+  useEffect(() => {
+    Notification.requestPermission();
+  }, []);
 
   const levelUp = () => {
     setLevel(level + 1);
@@ -45,10 +51,49 @@ export const ChallengesProvider: React.FC = ({
     const challenge = challenges[randomChallengeIndex];
 
     setActiveChallenge(challenge);
+
+    new Audio('/notification.mp3').play();
+
+    if (Notification.permission === 'granted') {
+      // eslint-disable-next-line no-new
+      new Notification('New Challenge', {
+        body: `Earn ${challenge.amount}xp reward completing this challenge`,
+      });
+    }
   };
 
   const resetChallenge = () => {
     setActiveChallenge(null);
+  };
+
+  const checkUserExperience = (
+    totalExperience: number,
+    actualLevel: number,
+  ) => {
+    const expToNextLevel = ((actualLevel + 1) * 4) ** 2;
+    if (totalExperience > expToNextLevel) {
+      totalExperience -= expToNextLevel;
+      actualLevel += 1;
+      return checkUserExperience(totalExperience, actualLevel);
+    }
+
+    setLevel(actualLevel);
+    return totalExperience;
+  };
+
+  const completeChallenge = () => {
+    if (!activeChallenge) {
+      return;
+    }
+    const { amount } = activeChallenge;
+
+    const totalExperience = amount + currentExperience;
+    const actualLevel = level;
+
+    const finalExperience = checkUserExperience(totalExperience, actualLevel);
+    setCurrentExperience(finalExperience);
+    setActiveChallenge(null);
+    setChallengesCompleted(challengesCompleted + 1);
   };
 
   return (
@@ -62,6 +107,7 @@ export const ChallengesProvider: React.FC = ({
         activeChallenge,
         resetChallenge,
         experienceToNextLevel,
+        completeChallenge,
       }}
     >
       {children}

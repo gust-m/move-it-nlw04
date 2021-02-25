@@ -7,10 +7,24 @@ import {
 } from './styles';
 
 import { ChallengeContext } from '../../contexts/ChallengeContext';
+import { CountdownContext } from '../../contexts/CountdownContext';
 
 export const ChallengeBox: React.FC = () => {
-  const { activeChallenge, resetChallenge } = useContext(ChallengeContext);
+  const { activeChallenge, resetChallenge, completeChallenge } = useContext(
+    ChallengeContext,
+  );
 
+  const { resetCountdown } = useContext(CountdownContext);
+
+  const handleChallengeSucceeded = () => {
+    completeChallenge();
+    resetCountdown();
+  };
+
+  const handleChallengeFailed = () => {
+    resetChallenge();
+    resetCountdown();
+  };
   return (
     <Container>
       {activeChallenge ? (
@@ -27,10 +41,14 @@ export const ChallengeBox: React.FC = () => {
           </main>
 
           <footer>
-            <Button status={false} type="button" onClick={resetChallenge}>
+            <Button
+              status={false}
+              type="button"
+              onClick={handleChallengeFailed}
+            >
               false
             </Button>
-            <Button status type="button">
+            <Button status type="button" onClick={handleChallengeSucceeded}>
               true
             </Button>
           </footer>

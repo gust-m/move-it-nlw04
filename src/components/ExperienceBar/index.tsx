@@ -8,11 +8,11 @@ const ExperienceBar: React.FC = () => {
   );
 
   const percentExperience = String(
-    Math.floor((10 * 100) / experienceToNextLevel),
+    Math.floor((currentExperience * 100) / experienceToNextLevel),
   );
   return (
     <Header>
-      <span>0 xp</span>
+      <span>{0} xp</span>
       <div>
         <CurrentExperience width={`${percentExperience}%`}>
           <span>{currentExperience} xp</span>
