@@ -18,7 +18,7 @@ export const Header = styled.header`
   display: flex;
   align-items: center;
 
-  span {
+  > span {
     font-size: 1rem;
   }
 
@@ -37,11 +37,10 @@ export const CurrentExperience = styled.div<CurrentXPProps>`
   border-radius: 4px;
   background: var(--green);
 
-  span {
+  > span {
     position: absolute;
     margin-top: 12px;
     transform: translateX(-50%);
-    width: 3.5rem;
 
     ${props =>
       css`

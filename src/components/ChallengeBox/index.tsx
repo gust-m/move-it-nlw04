@@ -46,10 +46,10 @@ export const ChallengeBox: React.FC = () => {
               type="button"
               onClick={handleChallengeFailed}
             >
-              false
+              Failed
             </Button>
             <Button status type="button" onClick={handleChallengeSucceeded}>
-              true
+              Completed
             </Button>
           </footer>
         </ActiveChallengeContent>

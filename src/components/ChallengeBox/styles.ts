@@ -42,6 +42,10 @@ export const NotActiveChallengeContent = styled.div`
       margin-bottom: 1rem;
     }
   }
+
+  @media (max-height: 666px) {
+    max-height: 70%;
+  }
 `;
 
 export const ActiveChallengeContent = styled.div`
