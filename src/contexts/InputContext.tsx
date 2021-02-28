@@ -1,15 +1,7 @@
-import {
-  ReactNode,
-  useCallback,
-  useState,
-  createContext,
-  useRef,
-  MutableRefObject,
-} from 'react';
+import { ReactNode, useCallback, useState, createContext } from 'react';
 
 interface InputContextData {
   isFocused: boolean;
-  inputRef: MutableRefObject<any>;
   handleInputFocus: () => void;
   handleInputBlur: () => void;
 }
@@ -20,8 +12,9 @@ interface InputProps {
 
 export const InputContext = createContext({} as InputContextData);
 
-export const InputProvider: React.FC = ({ children }: InputProps) => {
-  const inputRef = useRef(null);
+export const InputProvider: React.FC<InputProps> = ({
+  children,
+}: InputProps) => {
   const [isFocused, setIsFocused] = useState(false);
 
   const handleInputFocus = useCallback((): void => {
@@ -38,7 +31,6 @@ export const InputProvider: React.FC = ({ children }: InputProps) => {
         isFocused,
         handleInputFocus,
         handleInputBlur,
-        inputRef,
       }}
     >
       {children}

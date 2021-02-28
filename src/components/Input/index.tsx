@@ -10,11 +10,11 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 // eslint-disable-next-line react/prop-types
 const Input: React.FC<InputProps> = ({ icon: Icon, ...rest }) => {
-  const { handleInputBlur, handleInputFocus, isFocused, inputRef } = useContext(
+  const { handleInputBlur, handleInputFocus, isFocused } = useContext(
     InputContext,
   );
   return (
-    <Container ref={inputRef} isFocused={isFocused}>
+    <Container isFocused={isFocused}>
       {Icon && <Icon size={20} />}
       <input onFocus={handleInputFocus} onBlur={handleInputBlur} {...rest} />
     </Container>
