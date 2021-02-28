@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { FaCheckCircle, FaRegStopCircle, FaPlay } from 'react-icons/fa';
-import { Container, Counter, Button } from './styles';
+import { Content, Counter, Button, Container } from './styles';
 import { CountdownContext } from '../../contexts/CountdownContext';
 
 const Countdown: React.FC = () => {
@@ -22,8 +22,8 @@ const Countdown: React.FC = () => {
     .split('');
 
   return (
-    <>
-      <Container>
+    <Container>
+      <Content>
         <Counter>
           <span>{minutesLeft}</span>
           <span>{minutesRight}</span>
@@ -33,7 +33,7 @@ const Countdown: React.FC = () => {
           <span>{secondsLeft}</span>
           <span>{secondsRight}</span>
         </Counter>
-      </Container>
+      </Content>
       <Button
         status={isActive}
         onClick={handleStartCountdown}
@@ -47,7 +47,7 @@ const Countdown: React.FC = () => {
           {!hasFinished && !isActive && <FaPlay size={20} />}
         </p>
       </Button>
-    </>
+    </Container>
   );
 };
 

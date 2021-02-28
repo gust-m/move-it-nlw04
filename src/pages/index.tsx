@@ -2,7 +2,7 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
-import { Container } from '../styles/pages/styles';
+import { Container } from '../styles/styles';
 
 import ExperienceBar from '../components/ExperienceBar';
 import Profile from '../components/Profile';
@@ -11,7 +11,6 @@ import Countdown from '../components/Countdown';
 import ChallengeBox from '../components/ChallengeBox';
 import { CountdownProvider } from '../contexts/CountdownContext';
 import { ChallengesProvider } from '../contexts/ChallengeContext';
-import { LevelUpModal } from '../components/LevelUpModal';
 
 interface CtxProps {
   level: number;

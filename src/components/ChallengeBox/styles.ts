@@ -17,6 +17,10 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
+
+  @media (max-width: 650px) {
+    margin-bottom: 5rem;
+  }
 `;
 
 export const NotActiveChallengeContent = styled.div`
@@ -79,12 +83,22 @@ export const ActiveChallengeContent = styled.div`
     p {
       line-height: 1.5;
     }
+
+    @media (max-width: 650px) {
+      margin-top: 1rem;
+    }
   }
 
   footer {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
+
+    @media (max-width: 650px) {
+      justify-items: center;
+      align-items: center;
+      margin-top: 2rem;
+    }
   }
 `;
 
@@ -119,4 +133,8 @@ export const Button = styled.button<ButtonProps>`
             background: ${shade(0.2, '#e83f5b')};
           }
         `}
+
+  @media (max-width: 840px) {
+    width: 9rem;
+  }
 `;

@@ -9,6 +9,10 @@ export const Container = styled.div`
     height: 5.5rem;
     border-radius: 50%;
   }
+
+  @media (max-width: 650px) {
+    margin-top: 2rem;
+  }
 `;
 
 export const Description = styled.div`

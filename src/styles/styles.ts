@@ -17,5 +17,10 @@ export const Container = styled.div`
     gap: 6.25rem;
 
     align-content: center;
+
+    @media (max-width: 650px) {
+      display: flex;
+      flex-direction: column;
+    }
   }
 `;

@@ -29,7 +29,7 @@ export const CountdownContext = createContext({} as CountdownContextData);
 export const CountdownProvider: React.FC = ({ children }: CountdownProps) => {
   const { startNewChallenge } = useContext(ChallengeContext);
 
-  const [time, setTime] = useState(60 * 25);
+  const [time, setTime] = useState(60 * 0.05);
   const [isActive, setIsActive] = useState(false);
   const [buttonText, setButtonText] = useState('Start a cycle');
   const [hasFinished, setHasFinished] = useState(false);
@@ -56,7 +56,7 @@ export const CountdownProvider: React.FC = ({ children }: CountdownProps) => {
 
     if (!isActive && !hasFinished) {
       clearTimeout(countdownTimeout);
-      setTime(60 * 25);
+      setTime(60 * 0.05);
       setButtonText('Start a cycle');
     }
 
@@ -69,7 +69,7 @@ export const CountdownProvider: React.FC = ({ children }: CountdownProps) => {
 
   const resetCountdown = (): void => {
     clearTimeout(countdownTimeout);
-    setTime(60 * 25);
+    setTime(60 * 0.05);
     setHasFinished(false);
     setIsActive(false);
     setDisabledButton(false);

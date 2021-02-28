@@ -6,6 +6,13 @@ interface ButtonProps {
 }
 
 export const Container = styled.div`
+  @media (max-width: 650px) {
+    display: flex;
+    justify-content: space-around;
+  }
+`;
+
+export const Content = styled.div`
   display: flex;
   align-items: center;
   font-family: Rajdhani;
@@ -41,6 +48,10 @@ export const Counter = styled.div`
 
   span:last-child {
     border-left: 1px solid #f0f1f3;
+  }
+
+  @media (max-width: 760px) {
+    font-size: 5.5rem;
   }
 `;
 
@@ -102,4 +113,11 @@ export const Button = styled.button<ButtonProps>`
           border-bottom: 4px solid var(--green);
         `
       : css``}
+
+@media (max-width: 650px) {
+    margin-left: 10px;
+    max-width: 40%;
+    height: 90px;
+    margin-top: 1rem;
+  }
 `;
