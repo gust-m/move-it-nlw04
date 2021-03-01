@@ -137,6 +137,12 @@ export const Button = styled.button<ButtonProps>`
     height: 90px;
     margin-top: 1rem;
     flex: 1;
+
+    span {
+      p {
+        margin-right: 8px;
+      }
+    }
   }
 `;
 

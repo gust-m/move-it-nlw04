@@ -27,6 +27,7 @@ export const NotActiveChallengeContent = styled.div`
     font-size: 1.5rem;
     font-weight: 500;
     line-height: 1.4;
+    width: 23rem;
   }
 
   p {

@@ -2,13 +2,16 @@ import React from 'react';
 
 import Head from 'next/head';
 import { GetServerSideProps } from 'next';
-import { Container } from '../../styles/home/styles';
+
+import { Container, FlexContent } from '../../styles/home/styles';
 
 import ExperienceBar from '../../components/ExperienceBar';
 import Profile from '../../components/Profile';
 import CompletedChallenges from '../../components/CompletedChallenges';
 import Countdown from '../../components/Countdown';
 import ChallengeBox from '../../components/ChallengeBox';
+import Sidebar from '../../components/Sidebar';
+
 import { CountdownProvider } from '../../contexts/CountdownContext';
 import { ChallengesProvider } from '../../contexts/ChallengeContext';
 
@@ -29,26 +32,29 @@ const Home: React.FC<CtxProps> = ({
       currentExperience={currentExperience}
       challengesCompleted={challengesCompleted}
     >
-      <Container>
-        <Head>
-          <title>Home | move.it</title>
-        </Head>
+      <FlexContent>
+        <Sidebar />
+        <Container>
+          <Head>
+            <title>Home | move.it</title>
+          </Head>
 
-        <ExperienceBar />
+          <ExperienceBar />
 
-        <CountdownProvider>
-          <section>
-            <div>
-              <Profile />
-              <CompletedChallenges />
-              <Countdown />
-            </div>
-            <div>
-              <ChallengeBox />
-            </div>
-          </section>
-        </CountdownProvider>
-      </Container>
+          <CountdownProvider>
+            <section>
+              <div>
+                <Profile />
+                <CompletedChallenges />
+                <Countdown />
+              </div>
+              <div>
+                <ChallengeBox />
+              </div>
+            </section>
+          </CountdownProvider>
+        </Container>
+      </FlexContent>
     </ChallengesProvider>
   );
 };

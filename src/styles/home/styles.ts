@@ -28,3 +28,8 @@ export const Container = styled.div`
     }
   }
 `;
+
+export const FlexContent = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
