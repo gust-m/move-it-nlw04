@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img  alt="MoveIt" title="moveitapp" src=.public/icons/logo-moveit.svg width="400px"/>
+    <img  alt="MoveIt" title="moveitapp" src=.github/logo-moveit.svg width="400px"/>
 </h1>
 
 <p align="center">
