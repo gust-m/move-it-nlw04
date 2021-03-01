@@ -44,11 +44,19 @@ export const Content = styled.div`
   > img {
     margin: 96px 0;
     width: 360px;
+
+    @media (max-width: 490px) {
+      width: 260px;
+    }
   }
 
   h1 {
     font-size: 36px;
     margin-bottom: 24px;
+
+    @media (max-width: 490px) {
+      font-size: 26px;
+    }
   }
 
   > span {
@@ -62,6 +70,10 @@ export const Content = styled.div`
     img {
       height: 40px;
       margin-right: 24px;
+
+      @media (max-width: 490px) {
+        height: 36px;
+      }
     }
 
     span {
@@ -69,6 +81,12 @@ export const Content = styled.div`
 
       font-size: 20px;
       line-height: 30px;
+      @media (max-width: 490px) {
+        width: 183px;
+
+        font-size: 14px;
+        line-height: 22px;
+      }
     }
   }
 
@@ -90,6 +108,9 @@ export const Content = styled.div`
       max-width: 280px;
     }
   }
+  @media (max-width: 490px) {
+    margin-left: 0;
+  }
 `;
 
 export const Button = styled.button<ButtonProps>`
@@ -110,4 +131,22 @@ export const Button = styled.button<ButtonProps>`
     css`
       background: var(--green);
     `}
+
+  @media (max-width: 490px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 20px;
+    }
+
+    width: 40px;
+    height: 57px;
+  }
+
+  &:focus {
+    outline: none;
+  }
 `;

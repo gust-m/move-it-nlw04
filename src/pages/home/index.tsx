@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { GetServerSideProps } from 'next';
 import Head from 'next/head';
-import { Container } from './styles';
+import { GetServerSideProps } from 'next';
+import { Container } from '../../styles/home/styles';
 
 import ExperienceBar from '../../components/ExperienceBar';
 import Profile from '../../components/Profile';

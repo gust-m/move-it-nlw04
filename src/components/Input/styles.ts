@@ -9,7 +9,6 @@ export const Container = styled.div<ContaienrProps>`
   border-radius: 5px 0px 0px 5px;
   padding: 0px 0px 0px 15px;
   width: 100%;
-  border: 2px solid var(--blue);
 
   background: rgb(73, 83, 184);
   background: linear-gradient(
@@ -43,6 +42,10 @@ export const Container = styled.div<ContaienrProps>`
         }
         color: var(--gray-line);
       `}
+    @media (max-width: 490px) {
+      width: 220px;
+      height: 57px;
+    }
   }
 
   ${props =>

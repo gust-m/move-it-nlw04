@@ -16,10 +16,6 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
-
-  @media (max-width: 650px) {
-    margin-bottom: 5rem;
-  }
 `;
 
 export const NotActiveChallengeContent = styled.div`
@@ -45,9 +41,8 @@ export const NotActiveChallengeContent = styled.div`
       margin-bottom: 1rem;
     }
   }
-
-  @media (max-height: 666px) {
-    max-height: 70%;
+  @media (max-width: 650px) {
+    padding-bottom: 15px;
   }
 `;
 
