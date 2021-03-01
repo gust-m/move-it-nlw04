@@ -5,10 +5,17 @@ interface ButtonProps {
   hasFinished: boolean;
 }
 
+interface CurrentTimeProps {
+  width: string;
+}
+
 export const Container = styled.div`
   @media (max-width: 650px) {
     display: flex;
     justify-content: space-around;
+    div {
+      flex: 1;
+    }
   }
 `;
 
@@ -64,6 +71,7 @@ export const Button = styled.button<ButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 
   border: 0;
   border-radius: 5px;
@@ -75,16 +83,23 @@ export const Button = styled.button<ButtonProps>`
   font-weight: 600;
   transition: background-color 0.2s;
 
+  outline: none;
+
+  span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
   p {
     display: flex;
     margin-left: 16px;
 
     ${props =>
-      props.hasFinished
-        ? css`
-            color: var(--green);
-          `
-        : css``}
+      props.hasFinished &&
+      css`
+        color: var(--green);
+      `}
   }
 
   &:not(:disabled):hover {
@@ -92,32 +107,46 @@ export const Button = styled.button<ButtonProps>`
   }
 
   ${props =>
-    props.status
-      ? css`
-          background: var(--white);
-          color: var(--title);
-
-          &:not(:disabled):hover {
-            background: var(--red);
-            color: var(--white);
-          }
-        `
-      : css``}
+    props.status &&
+    css`
+      background: var(--white);
+      color: var(--title);
+      border-radius: 5px 5px 0 0;
+      &:not(:disabled):hover {
+        background: var(--red);
+        color: var(--white);
+      }
+    `}
 
   ${props =>
-    props.hasFinished
-      ? css`
-          background: var(--white);
-          color: var(--text);
-          cursor: not-allowed;
-          border-bottom: 4px solid var(--green);
-        `
-      : css``}
+    props.hasFinished &&
+    css`
+      background: var(--white);
+      color: var(--text);
+      cursor: not-allowed;
+    `}
 
 @media (max-width: 650px) {
     margin-left: 10px;
-    max-width: 40%;
+    max-width: 100%;
     height: 90px;
     margin-top: 1rem;
+    flex: 1;
+  }
+`;
+
+export const CurrentTime = styled.div<CurrentTimeProps>`
+  height: 4px;
+  border-radius: 0 0 4px 4px;
+
+  ${props =>
+    css`
+      right: 0;
+      background: var(--green);
+      width: ${props.width};
+    `}
+
+  @media (max-width: 650px) {
+    margin-left: 10px;
   }
 `;

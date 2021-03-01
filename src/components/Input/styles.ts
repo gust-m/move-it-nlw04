@@ -38,6 +38,9 @@ export const Container = styled.div<ContaienrProps>`
     ${props =>
       props.isFocused &&
       css`
+        &::placeholder {
+          opacity: 0;
+        }
         color: var(--gray-line);
       `}
   }

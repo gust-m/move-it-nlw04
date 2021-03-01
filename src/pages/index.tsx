@@ -1,67 +1,53 @@
-import React from 'react';
+import { useState } from 'react';
+import { FiArrowRight, FiUser } from 'react-icons/fi';
 
-import { GetServerSideProps } from 'next';
+import Link from 'next/link';
+
 import Head from 'next/head';
-import { Container } from '../styles/styles';
+import Input from '../components/Input';
 
-import ExperienceBar from '../components/ExperienceBar';
-import Profile from '../components/Profile';
-import CompletedChallenges from '../components/CompletedChallenges';
-import Countdown from '../components/Countdown';
-import ChallengeBox from '../components/ChallengeBox';
-import { CountdownProvider } from '../contexts/CountdownContext';
-import { ChallengesProvider } from '../contexts/ChallengeContext';
+import { Container, Content, Button } from '../styles/styles';
 
-interface CtxProps {
-  level: number;
-  currentExperience: number;
-  challengesCompleted: number;
-}
+import { InputProvider } from '../contexts/InputContext';
 
-export const Home: React.FC<CtxProps> = ({
-  level,
-  currentExperience,
-  challengesCompleted,
-}: CtxProps) => {
+const SignIn: React.FC = () => {
+  const [isHasInputValue, setIsHasInputValue] = useState(false);
   return (
-    <ChallengesProvider
-      level={level}
-      currentExperience={currentExperience}
-      challengesCompleted={challengesCompleted}
-    >
+    <>
+      <Head>
+        <title>Sign In | move.it</title>
+      </Head>
       <Container>
-        <Head>
-          <title>Home | move.it</title>
-        </Head>
+        <img src="/icons/logo-background.svg" alt="Background Logo" />
 
-        <ExperienceBar />
+        <Content>
+          <img src="/icons/logo-moveit.svg" alt="Moveit Logo" />
 
-        <CountdownProvider>
-          <section>
-            <div>
-              <Profile />
-              <CompletedChallenges />
-              <Countdown />
-            </div>
-            <div>
-              <ChallengeBox />
-            </div>
-          </section>
-        </CountdownProvider>
+          <h1>Welcome</h1>
+
+          <span>
+            <img src="/icons/github-logo.svg" alt="Github Logo" />
+            <span>Sign in with your Github to start</span>
+          </span>
+          <div>
+            <InputProvider>
+              <Input
+                placeholder="Type your Github username"
+                icon={FiUser}
+                onChange={event => setIsHasInputValue(!!event.target.value)}
+              />
+
+              <Link href="/home">
+                <Button type="button" filled={isHasInputValue}>
+                  <FiArrowRight size={25} />
+                </Button>
+              </Link>
+            </InputProvider>
+          </div>
+        </Content>
       </Container>
-    </ChallengesProvider>
+    </>
   );
 };
 
-export default Home;
-
-export const getServerSideProps: GetServerSideProps = async ctx => {
-  const { level, currentExperience, challengesCompleted } = ctx.req.cookies;
-  return {
-    props: {
-      level: Number(level),
-      currentExperience: Number(currentExperience),
-      challengesCompleted: Number(challengesCompleted),
-    },
-  };
-};
+export default SignIn;

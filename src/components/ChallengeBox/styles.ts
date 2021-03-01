@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { shade } from 'polished';
 
 interface ButtonProps {
   status: boolean;
@@ -11,7 +10,7 @@ export const Container = styled.div`
   background: var(--white);
   border-radius: 5px;
   box-shadow: 0 0 60px rgba(0, 0, 0, 0.06);
-  padding: 1.5rem 2rem;
+  padding-top: 1.5rem;
 
   display: flex;
   align-items: center;
@@ -59,11 +58,16 @@ export const ActiveChallengeContent = styled.div`
   flex-direction: column;
 
   header {
+    display: flex;
     color: var(--blue);
     font-weight: 600;
     font-size: 1.25rem;
     padding: 0 2rem 1.5rem;
     border-bottom: 1px solid var(--gray-line);
+    max-width: 80%;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10%;
   }
 
   main {
@@ -72,6 +76,7 @@ export const ActiveChallengeContent = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 0 1.5rem;
 
     strong {
       font-size: 2rem;
@@ -92,49 +97,53 @@ export const ActiveChallengeContent = styled.div`
   footer {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem;
 
     @media (max-width: 650px) {
-      justify-items: center;
-      align-items: center;
       margin-top: 2rem;
     }
   }
 `;
 
 export const Button = styled.button<ButtonProps>`
-  height: 3rem;
-  width: 11rem;
+  height: 5rem;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   border: 0;
-  border-radius: 5px;
-
-  color: var(--white);
 
   font-size: 1rem;
   font-weight: 600;
   transition: background-color 0.2s;
+  border-top: 1.5px solid var(--gray-line);
+
+  &:first-child {
+    border-radius: 0 0 0 5px;
+    border-right: 0.5px solid var(--gray-line);
+  }
+
+  &:last-child {
+    border-radius: 0 0 5px 0;
+    border-left: 0.5px solid var(--gray-line);
+  }
 
   ${props =>
     props.status
       ? css`
-          background: var(--green);
+          background: #f7fff5;
+          color: #3fb023;
           &:hover {
-            background: ${shade(0.2, '#4cd62b')};
+            color: var(--white);
+            background: var(--green);
           }
         `
       : css`
-          background: var(--red);
+          background: #fff5f5;
+          color: #e83f5b;
           &:hover {
-            background: ${shade(0.2, '#e83f5b')};
+            color: var(--white);
+            background: #e83f5b;
           }
         `}
-
-  @media (max-width: 840px) {
-    width: 9rem;
-  }
 `;

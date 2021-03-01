@@ -41,6 +41,7 @@ export const CurrentExperience = styled.div<CurrentXPProps>`
     position: absolute;
     margin-top: 12px;
     transform: translateX(-50%);
+    width: 3.5rem;
 
     ${props =>
       css`

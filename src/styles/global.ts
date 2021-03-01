@@ -19,6 +19,7 @@ export default createGlobalStyle`
     --blue: #5965e0;
     --blue-dark: #4953b8;
     --blue-twitter: #2aa9e0;
+    --background-button: #fff5f5;
   }
 
   @media(max-width: 1080px) {

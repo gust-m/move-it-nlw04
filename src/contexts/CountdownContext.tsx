@@ -14,6 +14,8 @@ interface CountdownContextData {
   minutes: number;
   disabledButton: boolean;
   buttonText: string;
+  startingTime: number;
+  time: number;
   handleStartCountdown: () => void;
   resetCountdown: () => void;
 }
@@ -37,6 +39,7 @@ export const CountdownProvider: React.FC = ({ children }: CountdownProps) => {
 
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
+  const startingTime = (100 * 60 * 0.05) / (60 * 0.05);
 
   const handleStartCountdown = (): void => {
     // eslint-disable-next-line no-unused-expressions
@@ -86,6 +89,8 @@ export const CountdownProvider: React.FC = ({ children }: CountdownProps) => {
         buttonText,
         handleStartCountdown,
         resetCountdown,
+        time,
+        startingTime,
       }}
     >
       {children}
