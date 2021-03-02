@@ -1,24 +1,19 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 
 import { FiHome, FiAward } from 'react-icons/fi';
 
 import Link from 'next/link';
 
 import { Container, Navigation, Button } from './styles';
+import { SidebarContext } from '../../contexts/SidebarContext';
 
 const Sidebar: React.FC = () => {
-  const [isHomeSelected, setIsHomeSelected] = useState(true);
-  const [isAwardSelected, setIsAwardSelected] = useState(false);
-
-  const handleChangeToHomeIconSelected = (): void => {
-    setIsHomeSelected(true);
-    setIsAwardSelected(false);
-  };
-
-  const handleChangeToAwardIconSelected = (): void => {
-    setIsHomeSelected(false);
-    setIsAwardSelected(true);
-  };
+  const {
+    isHomeSelected,
+    isAwardSelected,
+    handleChangeToHomeIconSelected,
+    handleChangeToAwardIconSelected,
+  } = useContext(SidebarContext);
 
   return (
     <Container>

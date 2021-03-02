@@ -14,6 +14,7 @@ import Sidebar from '../../components/Sidebar';
 
 import { CountdownProvider } from '../../contexts/CountdownContext';
 import { ChallengesProvider } from '../../contexts/ChallengeContext';
+import { SidebarProvider } from '../../contexts/SidebarContext';
 
 interface CtxProps {
   level: number;
@@ -33,7 +34,9 @@ const Home: React.FC<CtxProps> = ({
       challengesCompleted={challengesCompleted}
     >
       <FlexContent>
-        <Sidebar />
+        <SidebarProvider>
+          <Sidebar />
+        </SidebarProvider>
         <Container>
           <Head>
             <title>Home | move.it</title>
