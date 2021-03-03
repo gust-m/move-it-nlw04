@@ -1,27 +1,43 @@
 import { Container, Footer } from './styles';
 
-const InputLeaderboard: React.FC = () => {
+interface InputLeaderboardProps {
+  position: number;
+  name: string;
+  level: number;
+  challengesCompleted: number;
+  experience: number;
+  image: string;
+}
+
+const InputLeaderboard: React.FC<InputLeaderboardProps> = ({
+  level,
+  challengesCompleted,
+  experience,
+  name,
+  position,
+  image,
+}) => {
   return (
     <Container>
-      <h1>1</h1>
-      <img src="https://github.com/gust-m.png" alt=" Gustavo Moraes" />
+      <h1>{position}</h1>
+      <img src={image} alt=" Gustavo Moraes" />
       <div>
-        <h1>Gustavo Moraes</h1>
+        <h1>{name}</h1>
         <span>
           <img src="/icons/level-up.svg" alt="Level up" />
-          <p>Level 25</p>
+          <p>Level {level}</p>
         </span>
       </div>
 
       <Footer>
         <div>
           <span>
-            <h2> 121</h2>
+            <h2> {challengesCompleted}</h2>
             <p> completados</p>
           </span>
 
           <span>
-            <h2>100000</h2>
+            <h2>{experience}</h2>
             <p> xp</p>
           </span>
         </div>

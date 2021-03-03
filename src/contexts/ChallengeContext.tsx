@@ -17,6 +17,7 @@ interface ChallengeProviderData {
   currentExperience: number;
   activeChallenge: ExerciseProps;
   experienceToNextLevel: number;
+  totalExperience: number;
   levelUp: () => void;
   startNewChallenge: () => void;
   resetChallenge: () => void;
@@ -29,6 +30,7 @@ interface ChallengesProvidersProps {
   level: number;
   challengesCompleted: number;
   currentExperience: number;
+  totalExperience: number;
 }
 
 export const ChallengeContext = createContext({} as ChallengeProviderData);
@@ -43,6 +45,9 @@ export const ChallengesProvider: React.FC<ChallengesProvidersProps> = ({
   );
   const [challengesCompleted, setChallengesCompleted] = useState(
     rest.challengesCompleted ?? 0,
+  );
+  const [totalExperience, setTotalExperience] = useState(
+    rest.totalExperience ?? 0,
   );
 
   const [activeChallenge, setActiveChallenge] = useState<ExerciseProps>(null);
@@ -59,7 +64,8 @@ export const ChallengesProvider: React.FC<ChallengesProvidersProps> = ({
     Cookies.set('level', String(level));
     Cookies.set('currentExperience', String(currentExperience));
     Cookies.set('challengesCompleted', String(challengesCompleted));
-  }, [challengesCompleted, currentExperience, level]);
+    Cookies.set('totalExperience', String(totalExperience));
+  }, [challengesCompleted, currentExperience, level, totalExperience]);
 
   const levelUp = () => {
     setLevel(level + 1);
@@ -87,19 +93,19 @@ export const ChallengesProvider: React.FC<ChallengesProvidersProps> = ({
   };
 
   const checkUserExperience = (
-    totalExperience: number,
+    totalExperienceEarned: number,
     actualLevel: number,
   ): number => {
     const expToNextLevel = ((actualLevel + 1) * 4) ** 2;
-    if (totalExperience > expToNextLevel) {
-      totalExperience -= expToNextLevel;
+    if (totalExperienceEarned > expToNextLevel) {
+      totalExperienceEarned -= expToNextLevel;
       actualLevel += 1;
-      return checkUserExperience(totalExperience, actualLevel);
+      return checkUserExperience(totalExperienceEarned, actualLevel);
     }
 
     setIsLevelUpModalOpen(true);
     setLevel(actualLevel);
-    return totalExperience;
+    return totalExperienceEarned;
   };
 
   const completeChallenge = () => {
@@ -108,16 +114,21 @@ export const ChallengesProvider: React.FC<ChallengesProvidersProps> = ({
     }
     const { amount } = activeChallenge;
 
-    const totalExperience = amount + currentExperience;
-    const actualLevel = level;
+    const totalExperienceEarned = amount + currentExperience;
 
-    if (totalExperience > experienceToNextLevel) {
-      const finalExperience = checkUserExperience(totalExperience, actualLevel);
+    if (totalExperienceEarned > experienceToNextLevel) {
+      const actualLevel = level;
+
+      const finalExperience = checkUserExperience(
+        totalExperienceEarned,
+        actualLevel,
+      );
       setCurrentExperience(finalExperience);
     } else {
-      setCurrentExperience(totalExperience);
+      setCurrentExperience(totalExperienceEarned);
     }
 
+    setTotalExperience(totalExperience + amount);
     setActiveChallenge(null);
     setChallengesCompleted(challengesCompleted + 1);
   };
@@ -139,6 +150,7 @@ export const ChallengesProvider: React.FC<ChallengesProvidersProps> = ({
         experienceToNextLevel,
         completeChallenge,
         closeLevelUpModal,
+        totalExperience,
       }}
     >
       {children}

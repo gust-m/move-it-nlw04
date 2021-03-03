@@ -9,6 +9,7 @@ export const Container = styled.div`
   border-radius: 10px;
 
   margin-bottom: 10px;
+  transition: transform 0.3s;
 
   > h1 {
     padding: 30px;
@@ -16,11 +17,12 @@ export const Container = styled.div`
     font-weight: 500;
     line-height: 29px;
     border-right: 4px solid var(--gray-line);
+    min-width: 80px;
   }
 
   > img {
-    width: 64px;
-    height: 64px;
+    min-width: 64px;
+    max-height: 64px;
 
     border-radius: 50%;
 
@@ -31,6 +33,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+
     h1 {
       font-size: 20px;
       line-height: 24px;
@@ -47,8 +50,13 @@ export const Container = styled.div`
       p {
         font-size: 16px;
         line-height: 19px;
+        min-width: 80px;
       }
     }
+  }
+
+  &:hover {
+    transform: translateX(10px);
   }
 `;
 
@@ -60,6 +68,7 @@ export const Footer = styled.div`
     flex-direction: row;
     justify-content: flex-end;
     margin-right: 58px;
+    min-width: 390px;
 
     span {
       h2 {

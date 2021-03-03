@@ -10,8 +10,10 @@ export const Content = styled.div`
   width: 100%;
   align-items: flex-start;
   flex-direction: column;
-  margin: 0 11.5rem;
-  margin-top: 2.5rem;
+  margin: 2.5rem 11.5rem 0 11.5rem;
+  @media (max-width: 1000px) {
+    margin: 1rem 0 0 3.5rem;
+  }
 
   h1 {
     color: var(--title);
@@ -37,6 +39,25 @@ export const Header = styled.header`
     p + p {
       margin-left: 2rem;
       margin-right: 27.5rem;
+
+      @media (max-width: 1420px) {
+        margin-right: 23.5rem;
+      }
+      @media (max-width: 1366px) {
+        margin-right: 22.5rem;
+      }
+      @media (max-width: 1300px) {
+        margin-right: 18.5rem;
+      }
+      @media (max-width: 1260px) {
+        margin-right: 14.5rem;
+      }
+      @media (max-width: 1000px) {
+        margin-right: 20.5rem;
+      }
+      @media (max-width: 950px) {
+        margin-right: 16rem;
+      }
     }
   }
 
@@ -50,7 +71,7 @@ export const Header = styled.header`
     }
 
     p + p {
-      margin-left: 5rem;
+      margin-left: 6rem;
     }
   }
 

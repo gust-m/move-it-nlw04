@@ -33,15 +33,16 @@ export const SidebarProvider: React.FC<SidebarProviderProps> = ({
   };
 
   useEffect(() => {
+    window.location.pathname === '/leaderboard' && setActiveButton(false);
     if (activeButton) {
-      setIsAwardSelected(false);
       setIsHomeSelected(true);
+      setIsAwardSelected(false);
     }
     if (!activeButton) {
       setIsAwardSelected(true);
       setIsHomeSelected(false);
     }
-  }, [activeButton, isAwardSelected, isHomeSelected]);
+  }, [activeButton]);
 
   return (
     <SidebarContext.Provider

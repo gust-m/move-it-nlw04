@@ -51,6 +51,10 @@ export const Container = styled.div<ContaienrProps>`
   ${props =>
     props.isFocused &&
     css`
-      /* border: 2px solid #232129; */
-    `}
+      box-shadow: inset 0 0 6px #232129;
+    `};
+
+  &:hover {
+    box-shadow: inset 0 0 6px #232129;
+  }
 `;

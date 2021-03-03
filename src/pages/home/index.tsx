@@ -20,15 +20,18 @@ interface CtxProps {
   level: number;
   currentExperience: number;
   challengesCompleted: number;
+  totalExperience: number;
 }
 
 const Home: React.FC<CtxProps> = ({
   level,
   currentExperience,
   challengesCompleted,
+  totalExperience,
 }: CtxProps) => {
   return (
     <ChallengesProvider
+      totalExperience={totalExperience}
       level={level}
       currentExperience={currentExperience}
       challengesCompleted={challengesCompleted}
@@ -65,10 +68,16 @@ const Home: React.FC<CtxProps> = ({
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async ctx => {
-  const { level, currentExperience, challengesCompleted } = ctx.req.cookies;
+  const {
+    level,
+    currentExperience,
+    challengesCompleted,
+    totalExperience,
+  } = ctx.req.cookies;
   return {
     props: {
       level: Number(level),
+      totalExperience: Number(totalExperience),
       currentExperience: Number(currentExperience),
       challengesCompleted: Number(challengesCompleted),
     },

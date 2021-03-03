@@ -49,7 +49,10 @@
      ],
      "import/prefer-default-export": "off",
      "react/jsx-props-no-spreading": "off",
-     "prettier/prettier": "error"
+     "prettier/prettier": "error",
+
+     "no-unused-expressions": "off",
+     "react/prop-types": "off"
     },
     "settings": {
       "import/resolver": {

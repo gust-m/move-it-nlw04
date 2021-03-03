@@ -42,7 +42,6 @@ export const CountdownProvider: React.FC = ({ children }: CountdownProps) => {
   const startingTime = (100 * 60 * 0.05) / (60 * 0.05);
 
   const handleStartCountdown = (): void => {
-    // eslint-disable-next-line no-unused-expressions
     isActive ? setIsActive(false) : setIsActive(true);
   };
 

@@ -8,7 +8,6 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   icon?: React.ComponentType<IconBaseProps>;
 }
 
-// eslint-disable-next-line react/prop-types
 const Input: React.FC<InputProps> = ({ icon: Icon, ...rest }) => {
   const { handleInputBlur, handleInputFocus, isFocused } = useContext(
     InputContext,
