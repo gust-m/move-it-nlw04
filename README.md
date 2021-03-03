@@ -18,6 +18,8 @@
 
 - O Moveit é um App que utiliza a técnica de pomodoro, com o objetivo de melhorar sua produtividade, e te ajudar a manter o foco, tirando você um pouco da cadeira dentro de um intervalo de tempo pra fazer alguns exercícios, melhorando assim sua saúde e relaxando a cabeça (aifnal, quem nunca ficou uma boa parte do dia todo tentando solucionar um problema, e ao fazer qualquer outra atividade conseguiu pensar numa solução). Esse App foi desenvolvido durante a NLW#4 organizado pela Rocketseat. Todo agradecimento e carinho do mundo pra esses caras que ajudam tanto a comunidade de Devs br <3
 
+Link do projeto upado na vercel: https://moveitnextnlw-three.vercel.app/
+
 ## 💾 Instalação
 
 ```diff
