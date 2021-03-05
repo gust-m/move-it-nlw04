@@ -28,6 +28,10 @@ export const Header = styled.header`
 
   margin-top: 2.5rem;
 
+  span {
+    opacity: 0.5;
+  }
+
   span:first-child {
     display: flex;
     p {

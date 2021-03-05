@@ -62,6 +62,7 @@ export const Button = styled.button<ButtonProps>`
 
           svg {
             color: var(--blue);
+            opacity: 1;
           }
         `
       : css`
@@ -74,6 +75,10 @@ export const Button = styled.button<ButtonProps>`
             margin-right: 2rem;
 
             color: var(--text);
+          }
+
+          svg {
+            opacity: 0.5;
           }
         `}
   &:focus {
