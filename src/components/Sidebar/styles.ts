@@ -14,6 +14,10 @@ export const Container = styled.div`
     position: absolute;
     padding: 2rem;
   }
+
+  @media (max-width: 520px) {
+    height: 200vh;
+  }
 `;
 
 export const Navigation = styled.div`
