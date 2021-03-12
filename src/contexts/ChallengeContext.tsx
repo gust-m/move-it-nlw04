@@ -81,8 +81,7 @@ export const ChallengesProvider: React.FC<ChallengesProvidersProps> = ({
     new Audio('/notification.mp3').play();
 
     if (Notification.permission === 'granted') {
-      // eslint-disable-next-line no-new
-      new Notification('New Challenge', {
+      const notification = new Notification('New Challenge', {
         body: `Earn ${challenge.amount}xp reward completing this challenge`,
       });
     }
