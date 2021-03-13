@@ -29,6 +29,33 @@ const Home: React.FC<CtxProps> = ({
   challengesCompleted,
   totalExperience,
 }: CtxProps) => {
+  // const check = () => {
+  //   if (!('serviceWorker' in navigator)) {
+  //     throw new Error('No Service Worker support!');
+  //   }
+  //   if (!('PushManager' in window)) {
+  //     throw new Error('No Push API Support!');
+  //   }
+  // };
+
+  // const registerServiceWorker = async () => {
+  //   const swRegistration = await navigator.serviceWorker.register('sw.js');
+  //   return swRegistration;
+  // };
+  // const main = async () => {
+  //   check();
+  //   const swRegistration = await registerServiceWorker();
+  // };
+  // main();
+  const registerServiceWorker = async () => {
+    const swRegistration = await navigator.serviceWorker.register('sw.js'); // notice the file name
+    console.log(swRegistration);
+    return swRegistration;
+  };
+  const main = async () => {
+    const swRegistration = await registerServiceWorker();
+  };
+  main();
   return (
     <ChallengesProvider
       totalExperience={totalExperience}
