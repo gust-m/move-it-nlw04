@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-globals */
 /* eslint-disable no-param-reassign */
 import { createContext, ReactNode, useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
@@ -81,29 +80,11 @@ export const ChallengesProvider: React.FC<ChallengesProvidersProps> = ({
 
     new Audio('/notification.mp3').play();
 
-    // if (Notification.permission === 'granted') {
-    //   if (screen.width <= 580) {
-    //     if ('serviceWorker' in navigator) {
-    //       navigator.serviceWorker.register('/sw.js').then(
-    //         registration => {
-    //           console.log(
-    //             'Service worker registration succeeded:',
-    //             registration,
-    //           );
-    //         },
-    //         error => {
-    //           console.log('Service worker registration failed:', error);
-    //         },
-    //       );
-    //     } else {
-    //       console.log('Service workers are not supported.');
-    //     }
-    //   } else {
-    //     const notification = new Notification('New Challenge', {
-    //       body: `Earn ${challenge.amount}xp reward completing this challenge`,
-    //     });
-    //   }
-    // }
+    if (Notification.permission === 'granted') {
+      const notification = new Notification('New Challenge', {
+        body: `Earn ${challenge.amount}xp reward completing this challenge`,
+      });
+    }
   };
 
   const resetChallenge = () => {
