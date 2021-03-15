@@ -1,7 +1,9 @@
-import React from 'react';
-
+import React, { useContext, useEffect } from 'react';
+import firebase from 'firebase';
 import Head from 'next/head';
+
 import { GetServerSideProps } from 'next';
+import { firebaseCloudMessaging } from '../../../webPush.js';
 
 import { Container, FlexContent } from '../../styles/home/styles';
 
@@ -13,7 +15,10 @@ import ChallengeBox from '../../components/ChallengeBox';
 import Sidebar from '../../components/Sidebar';
 
 import { CountdownProvider } from '../../contexts/CountdownContext';
-import { ChallengesProvider } from '../../contexts/ChallengeContext';
+import {
+  ChallengeContext,
+  ChallengesProvider,
+} from '../../contexts/ChallengeContext';
 import { SidebarProvider } from '../../contexts/SidebarContext';
 
 interface CtxProps {
@@ -23,39 +28,43 @@ interface CtxProps {
   totalExperience: number;
 }
 
+declare const self: any;
+
 const Home: React.FC<CtxProps> = ({
   level,
   currentExperience,
   challengesCompleted,
   totalExperience,
 }: CtxProps) => {
-  // const check = () => {
-  //   if (!('serviceWorker' in navigator)) {
-  //     throw new Error('No Service Worker support!');
-  //   }
-  //   if (!('PushManager' in window)) {
-  //     throw new Error('No Push API Support!');
-  //   }
-  // };
+  const { startNewChallenge } = useContext(ChallengeContext);
 
-  // const registerServiceWorker = async () => {
-  //   const swRegistration = await navigator.serviceWorker.register('sw.js');
-  //   return swRegistration;
-  // };
-  // const main = async () => {
-  //   check();
-  //   const swRegistration = await registerServiceWorker();
-  // };
-  // main();
-  const registerServiceWorker = async () => {
-    const swRegistration = await navigator.serviceWorker.register('sw.js'); // notice the file name
-    console.log(swRegistration);
-    return swRegistration;
-  };
-  const main = async () => {
-    const swRegistration = await registerServiceWorker();
-  };
-  main();
+  useEffect(() => {
+    function getMessage() {
+      const messaging = firebase.messaging();
+
+      console.log({ messaging });
+
+      messaging.onMessage(() => {
+        const title = 'Hellow';
+        const options = {
+          body: 'world',
+        };
+        self.registration.showNotification(title, options);
+      });
+    }
+    async function setToken() {
+      try {
+        const token = await firebaseCloudMessaging.init();
+        if (token) {
+          getMessage();
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    setToken();
+  });
+
   return (
     <ChallengesProvider
       totalExperience={totalExperience}
