@@ -8,7 +8,7 @@ export default createGlobalStyle`
   }
 
   :root {
-    --white: #fff;
+    --white: #ffffff;
     --background: #f2f3f5;
     --gray-line: #dcdde0;
     --text: #666;
