@@ -40,6 +40,7 @@ export const ChallengesProvider: React.FC<ChallengesProvidersProps> = ({
   ...rest
 }: ChallengesProvidersProps) => {
   const [level, setLevel] = useState(rest.level ?? 1);
+
   const [currentExperience, setCurrentExperience] = useState(
     rest.currentExperience ?? 0,
   );
@@ -80,9 +81,9 @@ export const ChallengesProvider: React.FC<ChallengesProvidersProps> = ({
 
     new Audio('/notification.mp3').play();
 
-    Notification.requestPermission(function (result) {
+    Notification.requestPermission(result => {
       if (result === 'granted') {
-        navigator.serviceWorker.ready.then(function (registration) {
+        navigator.serviceWorker.ready.then(registration => {
           registration.showNotification('MoveIt 😎', {
             body: `Novo desafio Valendo ${challenge.amount} xp!`,
             icon: 'favicon.png',

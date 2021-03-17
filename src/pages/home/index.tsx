@@ -2,6 +2,7 @@ import Head from 'next/head';
 
 import { GetServerSideProps } from 'next';
 
+import Cookies from 'js-cookie';
 import { Container, FlexContent } from '../../styles/home/styles';
 
 import ExperienceBar from '../../components/ExperienceBar';
@@ -28,6 +29,8 @@ const Home: React.FC<CtxProps> = ({
   challengesCompleted,
   totalExperience,
 }: CtxProps) => {
+  const user = Cookies.get('username');
+  console.log(user);
   return (
     <ChallengesProvider
       totalExperience={totalExperience}
@@ -69,6 +72,7 @@ export default Home;
 export const getServerSideProps: GetServerSideProps = async ctx => {
   const {
     level,
+    username,
     currentExperience,
     challengesCompleted,
     totalExperience,
@@ -76,6 +80,7 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
   return {
     props: {
       level: Number(level),
+      username,
       totalExperience: Number(totalExperience),
       currentExperience: Number(currentExperience),
       challengesCompleted: Number(challengesCompleted),

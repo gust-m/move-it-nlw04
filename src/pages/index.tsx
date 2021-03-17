@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { FiArrowRight, FiUser } from 'react-icons/fi';
+import Cookies from 'js-cookie';
 
 import Link from 'next/link';
 
@@ -8,10 +9,17 @@ import Input from '../components/Input';
 
 import { Container, Content, Button } from '../styles/styles';
 
-import { InputProvider } from '../contexts/InputContext';
+import { InputContext, InputProvider } from '../contexts/InputContext';
 
 const SignIn: React.FC = () => {
+  const { handleSelectUsername } = useContext(InputContext);
   const [isHasInputValue, setIsHasInputValue] = useState(false);
+  const [username, setUsername] = useState('');
+
+  useEffect(() => {
+    Cookies.set('username', username);
+  }, [username]);
+
   return (
     <>
       <Head>
@@ -34,11 +42,14 @@ const SignIn: React.FC = () => {
               <Input
                 placeholder="Type your Github username"
                 icon={FiUser}
-                onChange={event => setIsHasInputValue(!!event.target.value)}
+                onChange={event => {
+                  setIsHasInputValue(!!event.target.value);
+                  setUsername(event.target.value);
+                }}
               />
 
               <Link href="/home">
-                <Button type="button" filled={isHasInputValue}>
+                <Button type="submit" filled={isHasInputValue}>
                   <FiArrowRight size={25} />
                 </Button>
               </Link>

@@ -4,6 +4,7 @@ interface InputContextData {
   isFocused: boolean;
   handleInputFocus: () => void;
   handleInputBlur: () => void;
+  handleSelectUsername: (inputValue: string) => void;
 }
 
 interface InputProps {
@@ -16,6 +17,7 @@ export const InputProvider: React.FC<InputProps> = ({
   children,
 }: InputProps) => {
   const [isFocused, setIsFocused] = useState(false);
+  const [username, setUsername] = useState('');
 
   const handleInputFocus = useCallback((): void => {
     setIsFocused(true);
@@ -25,12 +27,16 @@ export const InputProvider: React.FC<InputProps> = ({
     setIsFocused(false);
   }, []);
 
+  const handleSelectUsername = (inputValue: string): void => {
+    setUsername(inputValue);
+  };
   return (
     <InputContext.Provider
       value={{
         isFocused,
         handleInputFocus,
         handleInputBlur,
+        handleSelectUsername,
       }}
     >
       {children}
