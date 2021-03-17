@@ -72,7 +72,7 @@ export const ChallengesProvider: React.FC<ChallengesProvidersProps> = ({
     setIsLevelUpModalOpen(true);
   };
 
-  const startNewChallenge = async () => {
+  const startNewChallenge = () => {
     const randomChallengeIndex = Math.floor(Math.random() * challenges.length);
     const challenge = challenges[randomChallengeIndex];
 
@@ -80,11 +80,18 @@ export const ChallengesProvider: React.FC<ChallengesProvidersProps> = ({
 
     new Audio('/notification.mp3').play();
 
-    if (Notification.permission === 'granted') {
-      const notification = new Notification('New Challenge', {
-        body: `Earn ${challenge.amount}xp reward completing this challenge`,
-      });
-    }
+    Notification.requestPermission(function (result) {
+      if (result === 'granted') {
+        navigator.serviceWorker.ready.then(function (registration) {
+          registration.showNotification('MoveIt 😎', {
+            body: `Novo desafio Valendo ${challenge.amount} xp!`,
+            icon: 'favicon.png',
+            vibrate: [300, 100, 400],
+            tag: 'notification-sample',
+          });
+        });
+      }
+    });
   };
 
   const resetChallenge = () => {
