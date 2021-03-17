@@ -12,6 +12,4 @@ const CompletedChallenges: React.FC = () => {
   );
 };
 
-//teste
-
 export default CompletedChallenges;
