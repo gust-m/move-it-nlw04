@@ -30,6 +30,7 @@ interface ChallengeProviderData {
 interface ChallengesProvidersProps {
   children: ReactNode;
   level: number;
+  username: string;
   challengesCompleted: number;
   currentExperience: number;
   totalExperience: number;
@@ -59,7 +60,7 @@ export const ChallengesProvider: React.FC<ChallengesProvidersProps> = ({
 
   const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false);
 
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState(rest.username ?? '');
 
   useEffect(() => {
     Notification.requestPermission();

@@ -2,7 +2,6 @@ import Head from 'next/head';
 
 import { GetServerSideProps } from 'next';
 
-import { redirect } from 'next/dist/next-server/server/api-utils';
 import { Container, FlexContent } from '../../styles/home/styles';
 
 import ExperienceBar from '../../components/ExperienceBar';
@@ -26,6 +25,7 @@ interface CtxProps {
 
 const Home: React.FC<CtxProps> = ({
   level,
+  username,
   currentExperience,
   challengesCompleted,
   totalExperience,
@@ -36,6 +36,7 @@ const Home: React.FC<CtxProps> = ({
       level={level}
       currentExperience={currentExperience}
       challengesCompleted={challengesCompleted}
+      username={username}
     >
       <FlexContent>
         <SidebarProvider>
@@ -88,6 +89,7 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
   return {
     props: {
       level: Number(level),
+      username,
       totalExperience: Number(totalExperience),
       currentExperience: Number(currentExperience),
       challengesCompleted: Number(challengesCompleted),
