@@ -2,6 +2,7 @@ import Head from 'next/head';
 
 import { GetServerSideProps } from 'next';
 
+import { redirect } from 'next/dist/next-server/server/api-utils';
 import { Container, FlexContent } from '../../styles/home/styles';
 
 import ExperienceBar from '../../components/ExperienceBar';
@@ -17,6 +18,7 @@ import { SidebarProvider } from '../../contexts/SidebarContext';
 
 interface CtxProps {
   level: number;
+  username: string;
   currentExperience: number;
   challengesCompleted: number;
   totalExperience: number;
@@ -72,7 +74,17 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
     currentExperience,
     challengesCompleted,
     totalExperience,
+    username,
   } = ctx.req.cookies;
+
+  if (!username) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/',
+      },
+    };
+  }
   return {
     props: {
       level: Number(level),
