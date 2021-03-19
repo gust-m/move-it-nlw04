@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FiArrowRight, FiUser } from 'react-icons/fi';
 import Cookies from 'js-cookie';
 
@@ -9,10 +9,9 @@ import Input from '../components/Input';
 
 import { Container, Content, Button } from '../styles/styles';
 
-import { InputContext, InputProvider } from '../contexts/InputContext';
+import { InputProvider } from '../contexts/InputContext';
 
 const SignIn: React.FC = () => {
-  const { handleSelectUsername } = useContext(InputContext);
   const [isHasInputValue, setIsHasInputValue] = useState(false);
   const [username, setUsername] = useState('');
 

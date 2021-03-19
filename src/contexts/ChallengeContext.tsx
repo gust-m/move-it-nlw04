@@ -13,6 +13,7 @@ interface ExerciseProps {
 
 interface ChallengeProviderData {
   level: number;
+  username: string;
   challengesCompleted: number;
   currentExperience: number;
   activeChallenge: ExerciseProps;
@@ -23,6 +24,7 @@ interface ChallengeProviderData {
   resetChallenge: () => void;
   completeChallenge: () => void;
   closeLevelUpModal: () => void;
+  handleSelectUsername: (inputValue: string) => void;
 }
 
 interface ChallengesProvidersProps {
@@ -57,6 +59,8 @@ export const ChallengesProvider: React.FC<ChallengesProvidersProps> = ({
 
   const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false);
 
+  const [username, setUsername] = useState('');
+
   useEffect(() => {
     Notification.requestPermission();
   }, []);
@@ -72,6 +76,16 @@ export const ChallengesProvider: React.FC<ChallengesProvidersProps> = ({
     setLevel(level + 1);
     setIsLevelUpModalOpen(true);
   };
+
+  const handleSelectUsername = (inputValue: string): void => {
+    setUsername(inputValue);
+  };
+
+  const user = Cookies.get('username');
+
+  useEffect(() => {
+    user ? handleSelectUsername(user) : handleSelectUsername('teste');
+  }, [user]);
 
   const startNewChallenge = () => {
     const randomChallengeIndex = Math.floor(Math.random() * challenges.length);
@@ -148,6 +162,7 @@ export const ChallengesProvider: React.FC<ChallengesProvidersProps> = ({
     <ChallengeContext.Provider
       value={{
         level,
+        username,
         challengesCompleted,
         currentExperience,
         levelUp,
@@ -158,6 +173,7 @@ export const ChallengesProvider: React.FC<ChallengesProvidersProps> = ({
         completeChallenge,
         closeLevelUpModal,
         totalExperience,
+        handleSelectUsername,
       }}
     >
       {children}

@@ -1,12 +1,9 @@
-import Cookies from 'js-cookie';
 import { useContext } from 'react';
 import { ChallengeContext } from '../../contexts/ChallengeContext';
 import { Container, Description } from './styles';
 
 const Profile: React.FC = () => {
-  const username = Cookies.get('username');
-
-  const { level } = useContext(ChallengeContext);
+  const { level, username } = useContext(ChallengeContext);
   return (
     <Container>
       <img src={`https://github.com/${username}.png`} alt="Gustavo Moraes" />
