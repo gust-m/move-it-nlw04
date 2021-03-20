@@ -24,6 +24,7 @@ interface ChallengeProviderData {
   resetChallenge: () => void;
   completeChallenge: () => void;
   closeLevelUpModal: () => void;
+  logoutUser: () => void;
   handleSelectUsername: (inputValue: string) => void;
 }
 
@@ -59,6 +60,7 @@ export const ChallengesProvider: React.FC<ChallengesProvidersProps> = ({
   const experienceToNextLevel = ((level + 1) * 4) ** 2;
 
   const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false);
+  const [isLogged, setIsLogged] = useState(!!rest.level ?? false);
 
   const [username, setUsername] = useState(rest.username ?? '');
 
@@ -71,6 +73,7 @@ export const ChallengesProvider: React.FC<ChallengesProvidersProps> = ({
     Cookies.set('currentExperience', String(currentExperience));
     Cookies.set('challengesCompleted', String(challengesCompleted));
     Cookies.set('totalExperience', String(totalExperience));
+    setIsLogged(true);
   }, [challengesCompleted, currentExperience, level, totalExperience]);
 
   const levelUp = () => {
@@ -159,6 +162,16 @@ export const ChallengesProvider: React.FC<ChallengesProvidersProps> = ({
     setIsLevelUpModalOpen(false);
   };
 
+  const logoutUser = () => {
+    Cookies.remove('level');
+    Cookies.remove('currentExperience');
+    Cookies.remove('challengesCompleted');
+    Cookies.remove('totalExperience');
+    Cookies.remove('username');
+
+    setIsLogged(!isLogged);
+  };
+
   return (
     <ChallengeContext.Provider
       value={{
@@ -174,6 +187,7 @@ export const ChallengesProvider: React.FC<ChallengesProvidersProps> = ({
         completeChallenge,
         closeLevelUpModal,
         totalExperience,
+        logoutUser,
         handleSelectUsername,
       }}
     >

@@ -89,3 +89,43 @@ export const Button = styled.button<ButtonProps>`
     outline: none;
   }
 `;
+
+export const Logout = styled.div`
+  display: flex;
+  align-items: center;
+
+  position: absolute;
+
+  bottom: 4.5rem;
+  left: 0.75rem;
+
+  background: var(--red);
+
+  padding: 5px;
+
+  border-radius: 5px;
+
+  cursor: pointer;
+
+  transition: background-color 0.3s;
+
+  svg {
+    color: var(--white);
+    margin-right: 4px;
+  }
+
+  button {
+    height: 30px;
+
+    border: 0;
+    outline: none;
+
+    background: transparent;
+
+    color: var(--white);
+  }
+
+  &:hover {
+    background: #c91230;
+  }
+`;

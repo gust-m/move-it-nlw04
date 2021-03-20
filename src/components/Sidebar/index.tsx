@@ -1,11 +1,12 @@
 import { useContext } from 'react';
 
-import { FiHome, FiAward } from 'react-icons/fi';
+import { FiHome, FiAward, FiArrowLeft } from 'react-icons/fi';
 
 import Link from 'next/link';
 
-import { Container, Navigation, Button } from './styles';
+import { Container, Navigation, Button, Logout } from './styles';
 import { SidebarContext } from '../../contexts/SidebarContext';
+import { ChallengeContext } from '../../contexts/ChallengeContext';
 
 const Sidebar: React.FC = () => {
   const {
@@ -14,6 +15,8 @@ const Sidebar: React.FC = () => {
     handleChangeToHomeIconSelected,
     handleChangeToAwardIconSelected,
   } = useContext(SidebarContext);
+
+  const { logoutUser } = useContext(ChallengeContext);
 
   return (
     <Container>
@@ -41,6 +44,13 @@ const Sidebar: React.FC = () => {
           </Button>
         </Link>
       </Navigation>
+
+      <Link href="/">
+        <Logout onClick={logoutUser}>
+          <FiArrowLeft size={20} />
+          <button type="button">Logout</button>
+        </Logout>
+      </Link>
     </Container>
   );
 };
