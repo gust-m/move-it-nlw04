@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 /* eslint-disable no-param-reassign */
 import { createContext, ReactNode, useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
@@ -60,7 +61,8 @@ export const ChallengesProvider: React.FC<ChallengesProvidersProps> = ({
   const experienceToNextLevel = ((level + 1) * 4) ** 2;
 
   const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false);
-  const [isLogged, setIsLogged] = useState(!!rest.level ?? false);
+
+  const [isLogged, setIsLogged] = useState(false);
 
   const [username, setUsername] = useState(rest.username ?? '');
 
@@ -169,7 +171,7 @@ export const ChallengesProvider: React.FC<ChallengesProvidersProps> = ({
     Cookies.remove('totalExperience');
     Cookies.remove('username');
 
-    setIsLogged(!isLogged);
+    setIsLogged(false);
   };
 
   return (

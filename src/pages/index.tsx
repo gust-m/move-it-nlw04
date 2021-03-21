@@ -16,7 +16,9 @@ const SignIn: React.FC = () => {
   const [username, setUsername] = useState('');
 
   useEffect(() => {
-    Cookies.set('username', username);
+    if (username) {
+      Cookies.set('username', username);
+    }
   }, [username]);
 
   return (
