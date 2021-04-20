@@ -8,18 +8,20 @@ export default createGlobalStyle`
   }
 
   :root {
-    --white: #ffffff;
-    --background: #f2f3f5;
-    --gray-line: #dcdde0;
-    --text: #666;
-    --text-highlight: #b3b9ff;
-    --title: #2e384d;
-    --red: #e83f5b;
-    --green: #4cd62b;
-    --blue: #5965e0;
-    --blue-dark: #4953b8;
-    --blue-twitter: #2aa9e0;
-    --background-button: #fff5f5;
+    --white: #FFF;
+
+    --gray-50: #F7F8FA;
+    --gray-100: #E6E8EB;
+    --gray-200: #AFB2B1;
+    --gray-500: #808080;
+    --gray-800: #494D4B;
+
+    --green-500: #04D361;
+
+    --purple-300: #9F75FF;
+    --purple-400: #9164FA;
+    --purple-500: #8257E5;
+    --purple-800: #6F48C9;
   }
 
   @media(max-width: 1080px) {
@@ -27,7 +29,6 @@ export default createGlobalStyle`
       font-size: 93.75%;
     }
   }
-
   @media(max-width: 720) {
     html {
       font-size: 87.5%;
@@ -35,20 +36,29 @@ export default createGlobalStyle`
   }
 
   body {
-    background: var(--background);
-    color: var(--text);
+    background: var(--gray-50);
   }
 
-  body, input, button, textarea {
-    font: 400 16px 'Inter', sans-serif;
+  body, input, textarea, button {
+    font: 500 1rem Inter, sans-serif;
+    color: var(--gray-500);
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    font-family: Lexend, sans-serif;
+    color: var(----gray-800);
   }
 
   button {
     cursor: pointer;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
   }
 `;

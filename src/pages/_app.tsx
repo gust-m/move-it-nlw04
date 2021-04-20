@@ -1,32 +1,20 @@
-/* eslint-disable no-restricted-globals */
-import { ReactNode, useEffect } from 'react';
-import { AppProps } from 'next/app';
+import Header from '../components/Header';
+import Player from '../components/Player';
+
 import GlobalStyle from '../styles/global';
+import { Container } from '../styles/styles';
 
-const MyApp: ReactNode = ({ Component, pageProps }: AppProps) => {
-  useEffect(() => {
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').then(
-          registration => {
-            console.log(
-              'Service Worker registration successful with scope: ',
-              registration.scope,
-            );
-          },
-          err => {
-            console.log('Service Worker registration failed: ', err);
-          },
-        );
-      });
-    }
-  }, []);
-
+const MyApp = ({ Component, pageProps }) => {
   return (
-    <>
-      <Component {...pageProps} />
+    <Container>
+      <main>
+        <Header />
+        <Component {...pageProps} />
+      </main>
+
+      <Player />
       <GlobalStyle />
-    </>
+    </Container>
   );
 };
 
