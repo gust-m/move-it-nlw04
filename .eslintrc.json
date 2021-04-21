@@ -52,9 +52,7 @@
      "prettier/prettier": "error",
 
      "no-unused-expressions": "off",
-     "react/prop-types": "off",
-     "import/no-duplicates": "off",
-     "camelcase": "off"
+     "react/prop-types": "off"
     },
     "settings": {
       "import/resolver": {
